@@ -14,7 +14,7 @@
         <de.serviceexperiencecamp.android.views.TTFTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Saturday"
+            android:text="@string/firstDay"
             style="@style/EventListHeader"
             />
         <View style="@style/HorizontalLine" />
@@ -30,7 +30,7 @@
         <de.serviceexperiencecamp.android.views.TTFTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Sunday"
+            android:text="@string/secondDay"
             style="@style/EventListHeader"
             />
         <View style="@style/HorizontalLine" />

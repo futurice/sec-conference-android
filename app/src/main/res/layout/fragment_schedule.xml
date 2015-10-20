@@ -19,14 +19,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_normal"
         >
-        <de.serviceexperiencecamp.android.views.TTFTextView android:id="@+id/saturday_button"
-            android:text="@string/Saturday"
+        <de.serviceexperiencecamp.android.views.TTFTextView android:id="@+id/first_day_button"
+            android:text="@string/firstDay"
             style="@style/AgendaDayButton"
             />
 
-        <de.serviceexperiencecamp.android.views.TTFTextView android:id="@+id/sunday_button"
+        <de.serviceexperiencecamp.android.views.TTFTextView android:id="@+id/second_day_button"
             android:layout_marginLeft="@dimen/spacing_normal"
-            android:text="@string/Sunday"
+            android:text="@string/secondDay"
             style="@style/AgendaDayButton"
             />
     </LinearLayout>
