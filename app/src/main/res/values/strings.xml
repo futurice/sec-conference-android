@@ -15,4 +15,7 @@
     <string name="Saturday">Saturday</string>
     <string name="Sunday">Sunday</string>
 
+    <string name="firstDay">Friday</string>
+    <string name="secondDay">Saturday</string>
+
 </resources>

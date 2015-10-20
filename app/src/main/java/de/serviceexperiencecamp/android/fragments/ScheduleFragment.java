@@ -22,6 +22,7 @@ import de.serviceexperiencecamp.android.R;
 import de.serviceexperiencecamp.android.models.DaySchedule;
 import de.serviceexperiencecamp.android.models.EventsModel;
 import de.serviceexperiencecamp.android.models.pojo.Event;
+import de.serviceexperiencecamp.android.utils.Constant;
 import de.serviceexperiencecamp.android.utils.DateUtils;
 
 import java.security.InvalidParameterException;
@@ -49,9 +50,9 @@ public class ScheduleFragment extends Fragment {
     View.OnTouchListener gestureListener;
     private int hourMarkerWidthPx = 1;
     private HorizontalScrollView horizontalScrollView;
-    private View saturdayButton;
-    private View sundayButton;
-    private BehaviorSubject<String> selectedDay = BehaviorSubject.create("Saturday");
+    private View firstDayButton;
+    private View secondDayButton;
+    private BehaviorSubject<String> selectedDay = BehaviorSubject.create(Constant.FIRST_DAY);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,8 +67,8 @@ public class ScheduleFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         horizontalScrollView = (HorizontalScrollView) view.findViewById(R.id.timelineScrollView);
-        saturdayButton = view.findViewById(R.id.saturday_button);
-        sundayButton = view.findViewById(R.id.sunday_button);
+        firstDayButton = view.findViewById(R.id.first_day_button);
+        secondDayButton = view.findViewById(R.id.second_day_button);
 
         // Gestures
         gestureDetector = new GestureDetector(getActivity(), new GuitarSwipeListener());
@@ -76,13 +77,19 @@ public class ScheduleFragment extends Fragment {
         }};
         horizontalScrollView.setOnTouchListener(gestureListener);
 
-        saturdayButton.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) {
-            selectedDay.onNext("Saturday");
-        }});
+        firstDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedDay.onNext(Constant.FIRST_DAY);
+            }
+        });
 
-        sundayButton.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) {
-            selectedDay.onNext("Sunday");
-        }});
+        secondDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedDay.onNext(Constant.SECOND_DAY);
+            }
+        });
 
         return view;
     }
@@ -106,12 +113,12 @@ public class ScheduleFragment extends Fragment {
         compositeSubscription.add(selectedDay
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Action1<String>() { @Override public void call(String day) {
-                if ("Saturday".equals(day)) {
-                    saturdayButton.setSelected(true);
-                    sundayButton.setSelected(false);
-                } else if ("Sunday".equals(day)) {
-                    saturdayButton.setSelected(false);
-                    sundayButton.setSelected(true);
+                if (Constant.FIRST_DAY.equals(day)) {
+                    firstDayButton.setSelected(true);
+                    secondDayButton.setSelected(false);
+                } else if (Constant.SECOND_DAY.equals(day)) {
+                    firstDayButton.setSelected(false);
+                    secondDayButton.setSelected(true);
                 }
             }})
         );
@@ -390,11 +397,11 @@ public class ScheduleFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (saturdayButton != null) {
-            saturdayButton.setOnClickListener(null);
+        if (firstDayButton != null) {
+            firstDayButton.setOnClickListener(null);
         }
-        if (sundayButton != null) {
-            sundayButton.setOnClickListener(null);
+        if (secondDayButton != null) {
+            secondDayButton.setOnClickListener(null);
         }
     }
 }

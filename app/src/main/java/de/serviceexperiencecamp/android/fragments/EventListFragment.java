@@ -18,6 +18,7 @@ import de.serviceexperiencecamp.android.R;
 import de.serviceexperiencecamp.android.models.DaySchedule;
 import de.serviceexperiencecamp.android.models.EventsModel;
 import de.serviceexperiencecamp.android.models.pojo.Event;
+import de.serviceexperiencecamp.android.utils.Constant;
 import de.serviceexperiencecamp.android.utils.DateUtils;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -51,11 +52,11 @@ public class EventListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        compositeSubscription.add(getDaySchedule$("Saturday", eventsModel.getEvents$())
+        compositeSubscription.add(getDaySchedule$(Constant.FIRST_DAY, eventsModel.getEvents$())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new FillEventListAction())
         );
-        compositeSubscription.add(getDaySchedule$("Sunday", eventsModel.getEvents$())
+        compositeSubscription.add(getDaySchedule$(Constant.SECOND_DAY, eventsModel.getEvents$())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new FillEventListAction())
         );
@@ -72,10 +73,10 @@ public class EventListFragment extends Fragment {
         @Override
         public void call(DaySchedule daySchedule) {
             LinearLayout dayList;
-            if ("Saturday".equals(daySchedule.getConferenceDay())) {
+            if (Constant.FIRST_DAY.equals(daySchedule.getConferenceDay())) {
                 dayList = saturdayList;
             }
-            else if ("Sunday".equals(daySchedule.getConferenceDay())) {
+            else if (Constant.SECOND_DAY.equals(daySchedule.getConferenceDay())) {
                 dayList = sundayList;
             }
             else {
