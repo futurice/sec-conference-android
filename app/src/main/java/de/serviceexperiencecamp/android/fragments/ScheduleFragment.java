@@ -25,6 +25,7 @@ import de.serviceexperiencecamp.android.models.pojo.Event;
 import de.serviceexperiencecamp.android.utils.DateUtils;
 
 import java.security.InvalidParameterException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,13 +77,19 @@ public class ScheduleFragment extends Fragment {
         }};
         horizontalScrollView.setOnTouchListener(gestureListener);
 
-        saturdayButton.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) {
-            selectedDay.onNext("Saturday");
-        }});
+        saturdayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedDay.onNext("Saturday");
+            }
+        });
 
-        sundayButton.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) {
-            selectedDay.onNext("Sunday");
-        }});
+        sundayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedDay.onNext("Sunday");
+            }
+        });
 
         return view;
     }
@@ -91,29 +98,38 @@ public class ScheduleFragment extends Fragment {
     public void onResume() {
         super.onResume();
         compositeSubscription.add(selectedDay
-            .flatMap(new Func1<String, Observable<DaySchedule>>() { @Override public Observable<DaySchedule> call(String day) {
-                return getDaySchedule$(eventsModel.getEvents$(), day);
-            }})
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Action1<DaySchedule>() { @Override public void call(DaySchedule daySchedule) {
-                addTimeline(daySchedule);
-                addGigs(daySchedule);
-                addStages(daySchedule);
-                hideLoading();
-            }})
+                        .flatMap(new Func1<String, Observable<DaySchedule>>() {
+                            @Override
+                            public Observable<DaySchedule> call(String day) {
+                                return getDaySchedule$(eventsModel.getEvents$(), day);
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<DaySchedule>() {
+                            @Override
+                            public void call(DaySchedule daySchedule) {
+                                addTimeline(daySchedule);
+                                addGigs(daySchedule);
+                                addStages(daySchedule);
+                                hideLoading();
+                            }
+                        })
         );
 
         compositeSubscription.add(selectedDay
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Action1<String>() { @Override public void call(String day) {
-                if ("Saturday".equals(day)) {
-                    saturdayButton.setSelected(true);
-                    sundayButton.setSelected(false);
-                } else if ("Sunday".equals(day)) {
-                    saturdayButton.setSelected(false);
-                    sundayButton.setSelected(true);
-                }
-            }})
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<String>() {
+                            @Override
+                            public void call(String day) {
+                                if ("Saturday".equals(day)) {
+                                    saturdayButton.setSelected(true);
+                                    sundayButton.setSelected(false);
+                                } else if ("Sunday".equals(day)) {
+                                    saturdayButton.setSelected(false);
+                                    sundayButton.setSelected(true);
+                                }
+                            }
+                        })
         );
     }
 
@@ -153,21 +169,20 @@ public class ScheduleFragment extends Fragment {
     private void updateCurrentTimeline(DaySchedule daySchedule) {
         DateTime timelineStartMoment = getTimelineStartMoment(daySchedule);
         DateTime timelineEndMoment = getTimelineEndMoment(daySchedule);
-        DateTime now = daySchedule.getEarliestTime().plusMinutes(20);  // DateTime.now();
+        DateTime now = DateTime.now();
         View nowLine = getView().findViewById(R.id.timelineNowLine);
         nowLine.bringToFront();
         if (now.isAfter(timelineStartMoment) && now.isBefore(timelineEndMoment)) {
             nowLine.setVisibility(View.VISIBLE);
+            nowLine.bringToFront();
             TextView marginView = (TextView) getView().findViewById(R.id.timelineNowMargin);
             int duration = getDurationInMinutes(timelineStartMoment, now);
             int leftMargin = duration * dpToPx(EventTimelineView.MINUTE_WIDTH) - hourMarkerWidthPx/2 - 3;
-            //initialScrollTo = leftMargin - getWindowManager().getDefaultDisplay().getWidth()/2;
             marginView.setWidth(leftMargin);
+            horizontalScrollView.smoothScrollTo(leftMargin, 0);
         } else {
             nowLine.setVisibility(View.GONE);
         }
-
-        nowLine.setVisibility(View.INVISIBLE); // HIDE THIS FEATURE FOR NOW
     }
 
     private void hideLoading() {
