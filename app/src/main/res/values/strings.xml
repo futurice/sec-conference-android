@@ -17,5 +17,7 @@
 
     <string name="firstDay">@string/Friday</string>
     <string name="secondDay">@string/Saturday</string>
+    <string name="no_linkedin">No linkedin account for this author</string>
+    <string name="no_twitter">No twitter account for this author.</string>
 
 </resources>

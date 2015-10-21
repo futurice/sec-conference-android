@@ -17,9 +17,14 @@ public class Event {
     public String linkedin_url;
     public String image_url;
     public String speaker_image_url;
+    public String speaker_image_url_2;
     public Boolean bar_camp;
     public String day;
     public String artists;
+    public String artists_2;
+    public String speaker_role_2;
+    public String twitter_handle_2;
+    public String linkedin_url_2;
     public Integer starred_count;
 
     public Bundle getBundle() {
@@ -27,6 +32,7 @@ public class Event {
         bundle.putString("_id", _id);
         bundle.putString("title", title);
         bundle.putString("artists", artists);
+        bundle.putString("artists_2", artists_2);
         bundle.putString("start_time", start_time);
         bundle.putString("end_time", end_time);
         bundle.putString("image_url", image_url);
@@ -35,6 +41,9 @@ public class Event {
         bundle.putString("speaker_role", speaker_role);
         bundle.putString("linkedin_url", linkedin_url);
         bundle.putString("twitter_handle", twitter_handle);
+        bundle.putString("speaker_role_2", speaker_role_2);
+        bundle.putString("linkedin_url_2", linkedin_url_2);
+        bundle.putString("twitter_handle_2", twitter_handle_2);
         bundle.putString("description", description);
         return bundle;
     }
