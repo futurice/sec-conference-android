@@ -1,184 +1,240 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-
         android:background="@color/black"
-        >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            >
+            android:layout_height="200dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/event_placeholder"
                 android:alpha="0.25"
-                />
+                android:scaleType="centerCrop"
+                android:src="@drawable/event_placeholder"/>
 
             <ProgressBar
+                style="@android:style/Widget.Holo.ProgressBar.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                style="@android:style/Widget.Holo.ProgressBar.Large"
-                />
+                android:layout_centerInParent="true"/>
 
-            <ImageView android:id="@+id/image"
+            <ImageView
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                />
+                android:scaleType="centerCrop"/>
 
-            </RelativeLayout>
-
-        <View style="@style/HorizontalLine" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginRight="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_normal"
-            >
-            <ImageView android:id="@+id/linkedin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginRight="@dimen/spacing_normal"
-                android:src="@drawable/ic_linkedin_icon"
-                />
-
-            <ImageView android:id="@+id/twitter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_twitter_icon"
-                android:layout_toRightOf="@+id/linkedin"
-                />
-
-            <de.serviceexperiencecamp.android.views.TTFTextView android:id="@+id/favorite_button"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/touchable_ui_height_small"
-                android:layout_alignParentRight="true"
-                android:drawableLeft="@drawable/ic_star"
-                android:text="@string/save_as_favorite"
-                style="@style/EventFavoriteButton"
-                />
         </RelativeLayout>
 
-        <TextView android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginRight="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_small"
-            style="@style/H1Text"
-            />
-
-        <View
-            android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginRight="@dimen/spacing_normal"
-            style="@style/HorizontalLine"
-            />
+        <View style="@style/HorizontalLine"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_normal"
             android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginRight="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginBottom="@dimen/spacing_small"
-            >
-            <ImageView android:id="@+id/ic_clock"
+            android:layout_marginTop="@dimen/spacing_normal">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/H1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="@dimen/spacing_tiny"
+                android:layout_toLeftOf="@+id/favorite_button"/>
+
+            <ImageView
+                android:id="@+id/favorite_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_clock"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_star"/>
+
+        </RelativeLayout>
+
+        <View
+            style="@style/HorizontalLine"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small">
+
+            <ImageView
+                android:id="@+id/ic_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="@dimen/spacing_small"
-                />
+                android:src="@drawable/ic_clock"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/ic_clock"
-                >
-                <TextView android:id="@+id/time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/ContentText"
-                    />
+                android:orientation="vertical">
 
-                <TextView android:id="@+id/day"
+                <TextView
+                    android:id="@+id/time"
+                    style="@style/ContentText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/day"
                     style="@style/MinorContentText"
-                    />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
-            <TextView android:id="@+id/location"
+            <TextView
+                android:id="@+id/location"
+                style="@style/ContentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="90dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                style="@style/ContentText"
-                />
+                android:layout_alignParentTop="true"
+                android:minWidth="90dp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_stage"
-                android:layout_toLeftOf="@+id/location"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="@dimen/spacing_tiny"
-                />
+                android:layout_toLeftOf="@+id/location"
+                android:src="@drawable/ic_stage"/>
         </RelativeLayout>
 
         <View
-            android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginRight="@dimen/spacing_normal"
             style="@style/HorizontalLine"
-            />
-
-        <TextView android:id="@+id/speaker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginRight="@dimen/spacing_normal"
-            style="@style/H2Text"
-            />
+            android:layout_marginRight="@dimen/spacing_normal"/>
 
-        <TextView android:id="@+id/speaker_role"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginRight="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/speaker"
+                style="@style/H2Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_toLeftOf="@+id/linkedin"/>
+
+            <ImageView
+                android:id="@+id/linkedin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/twitter"
+                android:src="@drawable/ic_linkedin_icon"/>
+
+            <ImageView
+                android:id="@+id/twitter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:src="@drawable/ic_twitter_icon"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/speaker_role"
             style="@style/ContentText"
-            />
-
-        <TextView android:id="@+id/description"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"/>
+
+        <RelativeLayout
+            android:id="@+id/speaker2_global"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_normal"
             android:layout_marginRight="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_normal"
-            android:textIsSelectable="true"
+            android:layout_marginTop="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/speaker2"
+                style="@style/H2Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_toLeftOf="@+id/linkedin2"/>
+
+            <ImageView
+                android:id="@+id/linkedin2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/twitter2"
+                android:src="@drawable/ic_linkedin_icon"/>
+
+            <ImageView
+                android:id="@+id/twitter2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:src="@drawable/ic_twitter_icon"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/speaker_role2"
             style="@style/ContentText"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"/>
+
+        <View
+            style="@style/HorizontalLine"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"/>
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/ContentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
+            android:textIsSelectable="true"/>
 
     </LinearLayout>
 </ScrollView>

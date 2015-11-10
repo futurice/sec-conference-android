@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -35,12 +37,22 @@ public class EventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
 
         // Find the views
-        View linkedin = view.findViewById(R.id.linkedin);
-        View twitter = view.findViewById(R.id.twitter);
-        final TextView favoriteButton = (TextView) view.findViewById(R.id.favorite_button);
-        TextView titleView = (TextView) view.findViewById(R.id.title);
+
+        // first presenter
         TextView speakerView = (TextView) view.findViewById(R.id.speaker);
         TextView speakerRoleView = (TextView) view.findViewById(R.id.speaker_role);
+        ImageView linkedin = (ImageView) view.findViewById(R.id.linkedin);
+        ImageView twitter = (ImageView) view.findViewById(R.id.twitter);
+
+        TextView speakerView2 = (TextView) view.findViewById(R.id.speaker2);
+        TextView speakerRoleView2 = (TextView) view.findViewById(R.id.speaker_role2);
+        ImageView linkedin2 = (ImageView) view.findViewById(R.id.linkedin2);
+        ImageView twitter2 = (ImageView) view.findViewById(R.id.twitter2);
+        RelativeLayout globalSpeaker2 = (RelativeLayout) view.findViewById(R.id.speaker2_global);
+
+        final ImageView favoriteButton = (ImageView) view.findViewById(R.id.favorite_button);
+        TextView titleView = (TextView) view.findViewById(R.id.title);
+
         TextView timeView = (TextView) view.findViewById(R.id.time);
         TextView dayView = (TextView) view.findViewById(R.id.day);
         TextView locationView = (TextView) view.findViewById(R.id.location);
@@ -48,9 +60,26 @@ public class EventFragment extends Fragment {
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
 
         // Set the bundle arguments as the content for the views
-        titleView.setText(bundle.getString("title"));
         speakerView.setText(prepareString(bundle.getString("artists")));
         speakerRoleView.setText(prepareString(bundle.getString("speaker_role")));
+        setLinkedInContent(linkedin, bundle.getString("linkedin_url"));
+        setTwitterContent(twitter, bundle.getString("twitter_handle"));
+
+
+        if (isNullOrEmpty(bundle.getString("artists_2"))) {
+            globalSpeaker2.setVisibility(View.GONE);
+            speakerRoleView2.setVisibility(View.GONE);
+        } else
+        {
+            globalSpeaker2.setVisibility(View.VISIBLE);
+            speakerRoleView2.setVisibility(View.VISIBLE);
+            speakerView2.setText(prepareString(bundle.getString("artists_2")));
+            speakerRoleView2.setText(prepareString(bundle.getString("speaker_role_2")));
+            setLinkedInContent(linkedin2, bundle.getString("linkedin_url_2"));
+            setTwitterContent(twitter2, bundle.getString("twitter_handle_2"));
+        }
+
+        titleView.setText(bundle.getString("title"));
         timeView.setText(makeTimeString(
             bundle.getString("start_time"), bundle.getString("end_time"))
         );
@@ -58,8 +87,6 @@ public class EventFragment extends Fragment {
         locationView.setText(bundle.getString("location"));
         descriptionView.setText(processDescriptionString(bundle.getString("description")));
         setImageViewContent(imageView, bundle.getString("image_url"));
-        setLinkedInContent(linkedin, bundle.getString("linkedin_url"));
-        setTwitterContent(twitter, bundle.getString("twitter_handle"));
 
         final String _id = bundle.getString("_id");
         isFavorite = Event.getIsFavoriteFromPreferences(getActivity(), _id);
@@ -73,15 +100,13 @@ public class EventFragment extends Fragment {
         return view;
     }
 
-    private void setFavoriteButtonStatus(TextView favoriteButton, boolean isFavorite) {
+    private void setFavoriteButtonStatus(ImageView favoriteButton, boolean isFavorite) {
         favoriteButton.setSelected(isFavorite);
         if (isFavorite) {
-            favoriteButton.setText(getResources().getString(R.string.unfavorite));
-            favoriteButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_star_black,0,0,0);
+            favoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_black));
         }
         else {
-            favoriteButton.setText(getResources().getString(R.string.save_as_favorite));
-            favoriteButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_star, 0, 0, 0);
+            favoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_star));
         }
     }
 
@@ -101,6 +126,7 @@ public class EventFragment extends Fragment {
 
     private void setLinkedInContent(View view, final String linkedin_url) {
         if (!isNullOrEmpty(linkedin_url)) {
+            view.setAlpha(1);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -110,12 +136,21 @@ public class EventFragment extends Fragment {
             });
         }
         else {
-            view.setVisibility(View.GONE);
+            view.setAlpha(0.5f);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(),
+                            getActivity().getResources().getString(R.string.no_linkedin),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
     private void setTwitterContent(View view, final String twitter_handle) {
         if (!isNullOrEmpty(twitter_handle)) {
+            view.setAlpha(1);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -126,7 +161,15 @@ public class EventFragment extends Fragment {
             });
         }
         else {
-            view.setVisibility(View.GONE);
+            view.setAlpha(0.5f);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(),
+                            getActivity().getResources().getString(R.string.no_twitter),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
