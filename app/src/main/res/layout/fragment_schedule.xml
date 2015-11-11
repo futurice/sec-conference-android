@@ -7,11 +7,11 @@
     >
 
     <!--<TextView-->
-        <!--android:id="@+id/title"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--style="@style/ContentText"-->
-        <!--/>-->
+    <!--android:id="@+id/title"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--style="@style/ContentText"-->
+    <!--/>-->
 
     <LinearLayout
         android:orientation="horizontal"
@@ -48,96 +48,102 @@
             android:layout_centerInParent="true"
             />
 
-        <LinearLayout
-            android:id="@+id/stageLayout"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <HorizontalScrollView
-            android:id="@+id/timelineScrollView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/stageLayout"
-            android:scrollbarThumbHorizontal="@drawable/scroll_thumb"
-            >
-
-            <RelativeLayout
-                android:id="@+id/timeGridContainer"
+            <HorizontalScrollView
+                android:id="@+id/timelineScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:scrollbarThumbHorizontal="@drawable/scroll_thumb"
                 >
 
-                <!-- Time/hour -lines -->
                 <RelativeLayout
-                    android:id="@+id/RelativeLayout1"
-                    android:layout_width="match_parent"
+                    android:id="@+id/timeGridContainer"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
                     >
 
-                    <LinearLayout
-                        android:id="@+id/timelineNumbers"
+                    <!-- Time/hour -lines -->
+                    <RelativeLayout
+                        android:id="@+id/RelativeLayout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/timelineNumbers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:adjustViewBounds="true"
+                            android:orientation="horizontal"
+                            style="@style/ContentText"
+                            />
+
+                        <LinearLayout
+                            android:id="@+id/timelineVerticalLines"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:orientation="horizontal"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/RelativeLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:adjustViewBounds="true"
-                        android:orientation="horizontal"
-                        style="@style/ContentText"
-                        />
-
-                    <LinearLayout
-                        android:id="@+id/timelineVerticalLines"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:orientation="horizontal"
-                        />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/RelativeLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <LinearLayout
-                        android:id="@+id/timelineNow"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentTop="true"
-                        android:orientation="horizontal"
-                        android:visibility="invisible"
                         >
-                        <TextView
-                            android:id="@+id/timelineNowMargin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                        <include layout="@layout/timeline_now_marker"/>
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/gigLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        />
+                        <LinearLayout
+                            android:id="@+id/timelineNow"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal"
+                            android:visibility="invisible"
+                            >
+                            <TextView
+                                android:id="@+id/timelineNowMargin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+                            <include layout="@layout/timeline_now_marker"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/gigLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            />
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
-            </RelativeLayout>
-        </HorizontalScrollView>
+            </HorizontalScrollView>
 
+            <LinearLayout
+                android:id="@+id/stageLayout"
+                android:orientation="vertical"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:layout_marginBottom="1dp"
+                />
+
+        </FrameLayout>
     </RelativeLayout>
 
 </LinearLayout>
