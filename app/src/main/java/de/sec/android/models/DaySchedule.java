@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 import de.sec.android.models.pojo.Event;
+import de.sec.android.utils.Constant;
 
 public class DaySchedule {
 
@@ -22,6 +23,20 @@ public class DaySchedule {
     private DateTime latestTime;
 
     public DaySchedule(String conferenceDay, List<Event> events) {
+        this(conferenceDay, events, Constant.EventType.ALL);
+    }
+
+    private boolean isBarCamp (Event event) {
+//        return event.bar_camp != null && event.bar_camp;
+        return event.bar_camp;
+    }
+
+    private boolean isKeytalk (Event event) {
+//        return event.key_talk != null && event.key_talk;
+        return event.key_talk;
+    }
+
+    public DaySchedule(String conferenceDay, List<Event> events, Constant.EventType eventType) {
         this.conferenceDay = conferenceDay;
         this.eventsByLocation = new HashMap<String, List<Event>>();
 
@@ -32,13 +47,17 @@ public class DaySchedule {
 
         // Organize given list of events into eventsByLocation
         for (Event ev : events) {
+            Log.i("DaySchedule", "title: "+ev.title + " - barcamp: "+ev.bar_camp + " - keytalk: "+ev.key_talk + " evType filter: "+eventType + " day: "+ev.day + " conferenceDay: "+conferenceDay);
             if (ev.day == null) { continue; }
+            if (eventType == Constant.EventType.BAR_CAMP && !isBarCamp(ev)) { continue; }
+            if (eventType == Constant.EventType.KEY_TALK && !isKeytalk(ev)) { continue; }
             if (!ev.day.equals(conferenceDay)) { continue; }
 
             if (this.eventsByLocation.get(ev.location) == null) {
-                Log.e("DaySchedule", "Unknown/unexpected location: "+ev.location);
+                Log.e("DaySchedule", "Unknown/unexpected location: " + ev.location);
                 continue;
             }
+            Log.i("DaySchedule", "Event: "+ev.title+" is "+eventType);
             this.eventsByLocation.get(ev.location).add(ev);
         }
         setEarliestAndLatestTimes();

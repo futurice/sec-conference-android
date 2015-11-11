@@ -9,4 +9,10 @@ package de.sec.android.utils;
 public class Constant {
     public static String FIRST_DAY = "Friday";
     public static String SECOND_DAY = "Saturday";
+
+    public enum EventType {
+        BAR_CAMP,
+        KEY_TALK,
+        ALL
+    }
 }

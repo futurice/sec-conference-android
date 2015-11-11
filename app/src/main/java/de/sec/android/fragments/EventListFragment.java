@@ -32,6 +32,7 @@ public class EventListFragment extends Fragment {
     private EventsModel eventsModel;
     private LinearLayout saturdayList;
     private LinearLayout sundayList;
+    private Constant.EventType eventType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,10 +63,14 @@ public class EventListFragment extends Fragment {
         );
     }
 
+    public void setEventType(Constant.EventType eventType) {
+        this.eventType = eventType;
+    }
+
     private Observable<DaySchedule> getDaySchedule$(final String day, Observable<List<Event>> events$) {
         return events$
             .map(new Func1<List<Event>, DaySchedule>() { @Override public DaySchedule call(List<Event> events) {
-                return new DaySchedule(day, events);
+                return new DaySchedule(day, events, eventType);
             }});
     }
 
@@ -88,13 +93,11 @@ public class EventListFragment extends Fragment {
             DateUtils.sortEventsByStartTime(listEvents);
             boolean firstWasRendered = false;
             for (final Event event : listEvents) {
-                if (!event.bar_camp) {
                     if (firstWasRendered) {
                         dayList.addView(makeHorizontalLine(dayList));
                     }
                     dayList.addView(makeEventListItem(event));
                     firstWasRendered = true;
-                }
             }
         }
     }

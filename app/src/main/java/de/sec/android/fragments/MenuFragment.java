@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 
 import de.sec.android.MainActivity;
 import de.sec.android.R;
+import de.sec.android.utils.Constant;
 
 public class MenuFragment extends Fragment {
 
     private View agendaView;
     private View keyTalksView;
+    private View barCampsView;
     private View venue;
     private View info;
 
@@ -28,6 +30,7 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         agendaView = view.findViewById(R.id.agenda);
         keyTalksView = view.findViewById(R.id.keytalks);
+        barCampsView = view.findViewById(R.id.barcamps);
         venue = view.findViewById(R.id.venue);
         info = view.findViewById(R.id.info);
         return view;
@@ -41,6 +44,11 @@ public class MenuFragment extends Fragment {
             activity.fragment$.onNext(activity.scheduleFragment);
         }});
         keyTalksView.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) {
+            activity.eventListFragment.setEventType(Constant.EventType.KEY_TALK);
+            activity.fragment$.onNext(activity.eventListFragment);
+        }});
+        barCampsView.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) {
+            activity.eventListFragment.setEventType(Constant.EventType.BAR_CAMP);
             activity.fragment$.onNext(activity.eventListFragment);
         }});
         venue.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) {

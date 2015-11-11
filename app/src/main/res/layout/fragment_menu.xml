@@ -65,6 +65,21 @@
 
         <View style="@style/HorizontalLineSideMargins" />
 
+        <LinearLayout android:id="@+id/barcamps"
+            style="@style/MainMenuItem"
+            >
+            <ImageView
+                android:src="@drawable/ic_icon_barcamps"
+                style="@style/MainMenuItemIcon"
+                />
+            <de.sec.android.views.TTFTextView
+                android:text="Barcamp sessions"
+                style="@style/MainMenuItemText"
+                />
+        </LinearLayout>
+
+        <View style="@style/HorizontalLineSideMargins" />
+
         <LinearLayout android:id="@+id/venue"
             style="@style/MainMenuItem"
             >
