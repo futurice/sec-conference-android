@@ -18,7 +18,8 @@ public class Event {
     public String image_url;
     public String speaker_image_url;
     public String speaker_image_url_2;
-    public Boolean bar_camp;
+    public boolean bar_camp;
+    public boolean key_talk;
     public String day;
     public String artists;
     public String artists_2;
@@ -45,6 +46,10 @@ public class Event {
         bundle.putString("linkedin_url_2", linkedin_url_2);
         bundle.putString("twitter_handle_2", twitter_handle_2);
         bundle.putString("description", description);
+//        bundle.putBoolean("bar_camp", bar_camp != null ? bar_camp : new Boolean(false));
+//        bundle.putBoolean("key_talk", key_talk != null ? key_talk : new Boolean(false));
+        bundle.putBoolean("bar_camp", bar_camp);
+        bundle.putBoolean("key_talk", key_talk);
         return bundle;
     }
 
