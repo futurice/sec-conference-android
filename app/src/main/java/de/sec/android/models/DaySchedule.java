@@ -98,8 +98,8 @@ public class DaySchedule {
         for (Map.Entry<String, List<Event>> entry : eventsByLocation.entrySet()) {
             for (Event event : entry.getValue()) {
                 try {
-                    DateTime startTime = new DateTime(event.start_time, DateTimeZone.UTC);
-                    DateTime endTime = new DateTime(event.end_time, DateTimeZone.UTC);
+                    DateTime startTime = new DateTime(event.start_time, DateTimeZone.forID("Europe/Berlin"));
+                    DateTime endTime = new DateTime(event.end_time, DateTimeZone.forID("Europe/Berlin"));
                     if (startTime.isBefore(earliestTime)) {
                         earliestTime = startTime;
                     }

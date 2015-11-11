@@ -192,8 +192,8 @@ public class EventFragment extends Fragment {
     }
 
     private String makeTimeString(final String startInput, final String endInput) {
-        DateTime startDateTime = new DateTime(startInput, DateTimeZone.UTC);
-        DateTime endDateTime = new DateTime(endInput, DateTimeZone.UTC);
+        DateTime startDateTime = new DateTime(startInput, DateTimeZone.forID("Europe/Berlin"));
+        DateTime endDateTime = new DateTime(endInput, DateTimeZone.forID("Europe/Berlin"));
         String startOutput = startDateTime.toString("HH:mm");
         String endOutput = endDateTime.toString("HH:mm");
         return startOutput + "\u2014" + endOutput;
