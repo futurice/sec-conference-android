@@ -1,7 +1,5 @@
 package de.sec.android.models;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,12 +25,10 @@ public class DaySchedule {
     }
 
     private boolean isBarCamp (Event event) {
-//        return event.bar_camp != null && event.bar_camp;
         return event.bar_camp;
     }
 
     private boolean isKeytalk (Event event) {
-//        return event.key_talk != null && event.key_talk;
         return event.key_talk;
     }
 
@@ -47,17 +43,14 @@ public class DaySchedule {
 
         // Organize given list of events into eventsByLocation
         for (Event ev : events) {
-            Log.i("DaySchedule", "title: "+ev.title + " - barcamp: "+ev.bar_camp + " - keytalk: "+ev.key_talk + " evType filter: "+eventType + " day: "+ev.day + " conferenceDay: "+conferenceDay);
             if (ev.day == null) { continue; }
             if (eventType == Constant.EventType.BAR_CAMP && !isBarCamp(ev)) { continue; }
             if (eventType == Constant.EventType.KEY_TALK && !isKeytalk(ev)) { continue; }
             if (!ev.day.equals(conferenceDay)) { continue; }
 
             if (this.eventsByLocation.get(ev.location) == null) {
-                Log.e("DaySchedule", "Unknown/unexpected location: " + ev.location);
                 continue;
             }
-            Log.i("DaySchedule", "Event: "+ev.title+" is "+eventType);
             this.eventsByLocation.get(ev.location).add(ev);
         }
         setEarliestAndLatestTimes();
@@ -98,8 +91,8 @@ public class DaySchedule {
         for (Map.Entry<String, List<Event>> entry : eventsByLocation.entrySet()) {
             for (Event event : entry.getValue()) {
                 try {
-                    DateTime startTime = new DateTime(event.start_time, DateTimeZone.UTC);
-                    DateTime endTime = new DateTime(event.end_time, DateTimeZone.UTC);
+                    DateTime startTime = new DateTime(event.start_time, DateTimeZone.forID("Europe/Berlin"));
+                    DateTime endTime = new DateTime(event.end_time, DateTimeZone.forID("Europe/Berlin"));
                     if (startTime.isBefore(earliestTime)) {
                         earliestTime = startTime;
                     }
