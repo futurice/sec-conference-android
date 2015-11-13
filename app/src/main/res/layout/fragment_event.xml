@@ -13,13 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.25"
-                android:scaleType="centerCrop"
-                android:src="@drawable/event_placeholder"/>
-
             <ProgressBar
                 style="@android:style/Widget.Holo.ProgressBar.Large"
                 android:layout_width="wrap_content"

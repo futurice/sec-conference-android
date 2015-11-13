@@ -3,6 +3,7 @@ package de.sec.android.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -276,6 +277,7 @@ public class ScheduleFragment extends Fragment {
 
             // Render each event
             for (final Event event : getSortedEventsOfLocation(eventsByLocation, location)) {
+                Log.i("ScheduleFragment", "event: "+event.start_time+" - endTime: "+event.end_time+" title: "+event.title+ " room: "+event.location);
                 DateTime eventStartTime = new DateTime(event.start_time);
                 DateTime eventEndTime = new DateTime(event.end_time);
 
