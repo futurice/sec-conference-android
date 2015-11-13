@@ -27,34 +27,10 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 19
-        versionCode 8
-        versionName "1.7.4"
+        versionCode 9
+        versionName "1.7.5"
     }
-    signingConfigs {
-        release {
-            try {
-                storeFile file("example.keystore")
-                storePassword KEYSTORE_PASSWORD
-                keyAlias "client"
-                keyPassword KEY_PASSWORD
-            }
-            catch (ex) {
-                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and " +
-                    "KEY_PASSWORD in gradle.properties."
-                )
-            }
-        }
-    }
-    buildTypes {
-        debug {
-            minifyEnabled false
-        }
-        release {
-            signingConfig signingConfigs.release
-            minifyEnabled true
-            proguardFiles 'proguard-rules.pro'
-        }
-    }
+
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
